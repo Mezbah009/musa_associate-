@@ -283,6 +283,13 @@
                         <p>Case Study</p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('practices.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-newspaper"></i>
+                        <p>Practices</p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('jobs.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-briefcase"></i>

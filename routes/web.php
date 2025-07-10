@@ -27,6 +27,7 @@ use App\Http\Controllers\admin\ManagementController;
 use App\Http\Controllers\admin\NewsletterController;
 use App\Http\Controllers\admin\NumberController;
 use App\Http\Controllers\admin\OurJourneyController;
+use App\Http\Controllers\admin\PracticeController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ProductFirstSectionController;
 use App\Http\Controllers\admin\QualityController;
@@ -100,7 +101,9 @@ Route::get('/attorneys-details', [FrontController::class, 'attorneyDetails'])->n
 
 
 Route::get('/practice', [FrontController::class, 'practice'])->name('front.practice');
-Route::get('/practice-details', [FrontController::class, 'practiceDetails'])->name('front.practice.details');
+Route::get('/practice/{slug}', [FrontController::class, 'practiceDetails'])->name('front.practice.details');
+
+
 
 Route::get('/case-study', [FrontController::class, 'caseStudy'])->name('front.case_study');
 Route::get('/case-study/{slug}', [FrontController::class, 'showCaseStudy'])->name('front.showCaseStudy');
@@ -308,6 +311,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('blog_categories', BlogCategoryController::class);
         Route::resource('blog_tags', BlogTagController::class);
         Route::get('/comments', [BlogController::class, 'indexBlog'])->name('admin.comments.index');
+
+        // Practices
+        Route::resource('practices', PracticeController::class);
+
 
 
 

@@ -10,7 +10,7 @@
                         <h2>Appointment</h2>
                         <ul>
                             <li>
-                                <a href="index.html">Home</a>
+                                <a href="{{ route('front.home') }}">Home</a>
                             </li>
                             <li>
                                 <i class="icofont-simple-right"></i>

@@ -16,6 +16,7 @@
 
     <section class="content">
         <div class="container-fluid">
+            @include('admin.message')
             <div class="card">
                 <div class="card-body table-responsive p-0">
                     @if ($blogs->count())

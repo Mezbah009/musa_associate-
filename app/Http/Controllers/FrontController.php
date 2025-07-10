@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Mail\ContactFormSubmitted;
 use App\Models\CaseStudy;
 use App\Models\HomeSecondSection;
+use App\Models\Practice;
 use App\Models\User;
 
 class FrontController extends Controller
@@ -36,11 +37,14 @@ class FrontController extends Controller
         $home_services_section = HomeServicesSection::all();
         $data['home_services_section'] = $home_services_section;
 
-        $teamMembers = User::where('role', '!=', 2)->get();
+        $teamMembers = User::where('role', '!=', 2)->take(4)->get();
         $data['teamMembers'] = $teamMembers;
 
         $caseStudy = CaseStudy::latest()->take(3)->get();
         $data['caseStudy'] = $caseStudy;
+
+        $practice = Practice::latest()->take(6)->get();
+        $data['practice'] = $practice;
 
         return view('front.home', $data);
     }
@@ -79,13 +83,16 @@ class FrontController extends Controller
 
     public function practice()
     {
-        return view('front.practice');
+        $practice = Practice::all();
+        $data['practice'] = $practice;
+        return view('front.practice', $data);
     }
 
-    public function practiceDetails()
-    {
-        return view('front.practice-details');
-    }
+  public function practiceDetails($slug)
+{
+    $practice = Practice::where('slug', $slug)->firstOrFail();
+    return view('front.practice-details', compact('practice'));
+}
 
 
     public function caseStudy()

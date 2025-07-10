@@ -11,7 +11,7 @@
                         <h2>Case Studies Details</h2>
                         <ul>
                             <li>
-                                <a href="index.html">Home</a>
+                                <a href="{{ route('front.home') }}">Home</a>
                             </li>
                             <li>
                                 <i class="icofont-simple-right"></i>
