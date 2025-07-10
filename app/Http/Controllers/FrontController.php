@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Mail\ContactFormSubmitted;
 use App\Models\CaseStudy;
 use App\Models\HomeSecondSection;
+use App\Models\Number;
 use App\Models\Practice;
 use App\Models\User;
 
@@ -43,7 +44,8 @@ class FrontController extends Controller
         $caseStudy = CaseStudy::latest()->take(3)->get();
         $data['caseStudy'] = $caseStudy;
 
-        $practice = Practice::latest()->take(6)->get();
+        $practice = Practice::orderBy('id', 'asc')->take(6)->get();
+
         $data['practice'] = $practice;
 
         return view('front.home', $data);
@@ -60,9 +62,14 @@ class FrontController extends Controller
         return view('front.about', $data);
     }
 
-    public function contact()
+
+
+
+     public function contact()
     {
-        return view('front.contact');
+       $numbers = Number::latest()->take(2)->get();
+        $data['numbers'] = $numbers;
+        return view('front.contact', $data);
     }
 
     public function appointment()

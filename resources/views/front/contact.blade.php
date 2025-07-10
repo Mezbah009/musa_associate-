@@ -23,57 +23,62 @@
         <!-- End Page Title -->
 
         <!-- Contact Form -->
-        <div class="contact-form contact-form-four pb-100">
-            <!-- Location -->
-            <div class="loaction-area">
-                <div class="container">
-                    <div class="row location-bg">
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="location-item">
-                                <div class="location-icon">
-                                    <i class="flaticon-pin"></i>
-                                </div>
-                                <h3>Location</h3>
-                                <ul>
-                                    <li>2108-267 Dhaka, Bangladesh</li>
-                                </ul>
-                            </div>
+    <div class="contact-form contact-form-four pb-100">
+    <!-- Location -->
+    <div class="loaction-area">
+        <div class="container">
+            <div class="row location-bg">
+                <!-- Location (static) -->
+                <div class="col-sm-6 col-lg-4">
+                    <div class="location-item">
+                        <div class="location-icon">
+                            <i class="flaticon-pin"></i>
                         </div>
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="location-item">
-                                <div class="location-icon">
-                                    <i class="flaticon-call"></i>
-                                </div>
-                                <h3>Phone</h3>
-                                <ul>
-                                    <li>
-                                        <a href="tel:+0755543332322">+07 5554 3332 322</a>
-                                    </li>
-                                    <li>
-                                        <a href="tel:+0555962435736">+05 5596 2435 736</a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <h3>Location</h3>
+                        <ul>
+                            <li>2108-267 Dhaka, Bangladesh</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phone (dynamic) -->
+                <div class="col-sm-6 col-lg-4">
+                    <div class="location-item">
+                        <div class="location-icon">
+                            <i class="flaticon-call"></i>
                         </div>
-                        <div class="col-sm-6   col-lg-4">
-                            <div class="location-item">
-                                <div class="location-icon">
-                                    <i class="flaticon-email"></i>
-                                </div>
-                                <h3>Email</h3>
-                                <ul>
-                                    <li>
-                                        <a href=""><span class="__cf_email__" data-cfemail="">musa@associates.com</span></a>
-                                    </li>
-                                    <li>
-                                        <a href=""><span class="__cf_email__" data-cfemail="">associates@musa.com</span></a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <h3>Phone</h3>
+                        <ul>
+                            @foreach ($numbers as $item)
+                                @if ($item->phone)
+                                    <li><a href="tel:{{ $item->phone }}">{{ $item->phone }}</a></li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Email (dynamic) -->
+                <div class="col-sm-6 col-lg-4">
+                    <div class="location-item">
+                        <div class="location-icon">
+                            <i class="flaticon-email"></i>
                         </div>
+                        <h3>Email</h3>
+                        <ul>
+                            @foreach ($numbers as $item)
+                                @if ($item->email)
+                                    <li><a href="mailto:{{ $item->email }}">{{ $item->email }}</a></li>
+                                @endif
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
             <!-- End Location -->
 
             <div class="container-fluid">

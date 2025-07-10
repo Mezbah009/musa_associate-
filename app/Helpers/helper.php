@@ -25,3 +25,9 @@ function siteSetting()
 {
     return SiteSetting::latest()->first();
 }
+
+
+function numbers()
+{
+    return \App\Models\Number::latest()->take(5)->get(); // adjust limit as needed
+}

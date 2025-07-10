@@ -5,6 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Dynamic Title -->
+    <title>
+        @hasSection('meta_title')
+            @yield('meta_title') | {{ siteSetting()->site_title ?? 'Musa & Associates' }}
+        @else
+            {{ siteSetting()->site_title ?? 'Musa & Associates' }}
+        @endif
+    </title>
+
+    <!-- Meta Description -->
+    <meta name="description" content="@yield('meta_description', siteSetting()->meta_description ?? '')">
+
+    <!-- Meta Keywords -->
+    <meta name="keywords" content="@yield('meta_keywords', siteSetting()->meta_keywords ?? '')">
+
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('front-assets/assets/css/bootstrap.min.css') }}">
     <!-- Meanmenu CSS -->
@@ -31,9 +47,14 @@
     <!-- Theme Dark CSS -->
     <link rel="stylesheet" href="{{ asset('front-assets/assets/css/theme-dark.css') }}">
 
-    <title>Musa & Associates - Expert Tax Law Solutions for Businesses</title>
+    <title>
+        {{ siteSetting() && siteSetting()->site_title ? siteSetting()->site_title : 'Musa & Associates - Expert Tax Law Solutions for Businesses' }}
+    </title>
 
-    <link rel="icon" type="image/png" href="{{ asset('front-assets/assets/img/favicon.png') }}">
+
+    <link rel="icon" type="image/png"
+        href="{{ siteSetting() && siteSetting()->favicon ? asset('uploads/favicon/' . siteSetting()->favicon) : asset('front-assets/assets/img/favicon.png') }}">
+
 </head>
 
 <body>
@@ -58,7 +79,8 @@
         <!-- Menu For Mobile Device -->
         <div class="mobile-nav">
             <a href="{{ route('front.home') }}" class="logo">
-                <img src="{{ asset('front-assets/assets/img/logo.png') }}" alt="Logo">
+                <img src="{{ siteSetting() && siteSetting()->logo ? asset('uploads/logo/' . siteSetting()->logo) : asset('') }}"
+                    alt="logo" class="img-fluid">
             </a>
         </div>
 
@@ -67,7 +89,8 @@
             <div class="container">
                 <nav class="navbar navbar-expand-md navbar-light">
                     <a class="navbar-brand" href="{{ route('front.home') }}">
-                        <img src="{{ asset('front-assets/assets/img/logo.png') }}" alt="Logo">
+                        <img src="{{ siteSetting() && siteSetting()->logo ? asset('uploads/logo/' . siteSetting()->logo) : asset('') }}"
+                            alt="logo" class="img-fluid">
                     </a>
                     <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                         <ul class="navbar-nav">
@@ -144,13 +167,16 @@
 
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-sm-6 col-lg-4">
+                <div class="col-sm-6 col-lg-6">
                     <div class="footer-item">
                         <div class="footer-logo">
                             <a href="index-2.html#">
-                                <img src="{{ asset('front-assets/assets/img/logo.png') }}" alt="Logo">
+                                <img src="{{ siteSetting() && siteSetting()->logo ? asset('uploads/logo/' . siteSetting()->logo) : asset('') }}"
+                                    alt="logo" class="img-fluid">
                             </a>
-                            <p>We provide expert tax law services to help businesses stay compliant, reduce liabilities, and grow confidently. From tax planning to dispute resolution, our legal team is here to protect your interests.</p>
+                            <p>We provide expert tax law services to help businesses stay compliant, reduce liabilities,
+                                and grow confidently. From tax planning to dispute resolution, our legal team is here to
+                                protect your interests.</p>
                             <ul>
                                 <li>
                                     <a href="https://www.youtube.com/" target="_blank">
@@ -176,78 +202,40 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-6 col-lg-3">
-                    <div class="footer-item">
-                        <div class="footer-service">
-                            <h3>Services</h3>
-                            <ul>
-                                <li>
-                                    <a href="practice-details.html">
-                                        <i class="icofont-simple-right"></i>
-                                        Family Law
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="practice-details.html">
-                                        <i class="icofont-simple-right"></i>
-                                        Education Law
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="practice-details.html">
-                                        <i class="icofont-simple-right"></i>
-                                        Civil Law
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="practice-details.html">
-                                        <i class="icofont-simple-right"></i>
-                                        Criminal Law
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="practice-details.html">
-                                        <i class="icofont-simple-right"></i>
-                                        Business Law
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-lg-2">
                     <div class="footer-item">
                         <div class="footer-service">
                             <h3>Quick Links</h3>
                             <ul>
                                 <li>
-                                    <a href="index.html">
+                                    <a href="{{ route('front.home') }}">
                                         <i class="icofont-simple-right"></i>
                                         Home
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="about.html">
+                                    <a href="{{ route('front.about') }}">
                                         <i class="icofont-simple-right"></i>
                                         About Us
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="blog.html">
+                                    <a href="{{ route('front.practice') }}">
                                         <i class="icofont-simple-right"></i>
-                                        Blogs
+                                        Practice
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="attorney.html">
+                                    <a href="{{ route('front.attorneys') }}">
                                         <i class="icofont-simple-right"></i>
-                                        Team
+                                        Attorneys
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="testimonial.html">
+                                    <a href="{{ route('front.case_study') }}">
                                         <i class="icofont-simple-right"></i>
-                                        Testimonial
+                                        Case Studies
                                     </a>
                                 </li>
                             </ul>
@@ -259,21 +247,31 @@
                         <div class="footer-find">
                             <h3>Find Us</h3>
                             <ul>
+                                <!-- Static or optional dynamic address -->
                                 <li>
                                     <i class="icofont-location-pin"></i>
-                                    28/A Dhaka, Bangladesh
+                                    {{ siteSetting()->meta_title ?? '28/A Dhaka, Bangladesh' }}
                                 </li>
-                                <li>
-                                    <i class="icofont-ui-call"></i>
-                                    <a href="tel:+880123456789">+88 01 23 456 789</a>
-                                </li>
-                                <li>
-                                    <i class="icofont-at"></i>
-                                    <a
-                                        href=""><span
-                                            class="__cf_email__"
-                                            data-cfemail="">musa@associates.com</span></a>
-                                </li>
+
+                                <!-- Dynamic phone -->
+                                @foreach (numbers() as $item)
+                                    @if ($item->phone)
+                                        <li>
+                                            <i class="icofont-ui-call"></i>
+                                            <a href="tel:{{ $item->phone }}">{{ $item->phone }}</a>
+                                        </li>
+                                    @endif
+                                @endforeach
+
+                                @foreach (numbers() as $item)
+                                    @if ($item->email)
+                                        <li>
+                                            <i class="icofont-email"></i>
+                                            <a href="mailto:{{ $item->email }}">{{ $item->email }}</a>
+                                        </li>
+                                    @endif
+                                @endforeach
+
                             </ul>
                         </div>
                     </div>
@@ -283,8 +281,10 @@
                 <div class="row justify-content-center">
                     <div class="col-sm-7 col-lg-6">
                         <div class="copyright-item">
-                            <p>© Copyright Musa & Associates Designed by <a href="https://opus-bd.com/"
-                                    target="_blank">Opus Technology Limited</a></p>
+                            <p>© Copyright {{ siteSetting()->copyright_text ?? '' }} Designed by
+                                <a href="https://opus-bd.com/" target="_blank">Opus Technology Limited</a>
+                            </p>
+
                         </div>
                     </div>
                     <div class="col-sm-5 col-lg-6">
