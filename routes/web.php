@@ -92,7 +92,9 @@ Route::post('/subscribe', [FrontController::class, 'subscribe'])->name('newslett
 
 
 Route::get('/contact-us', [FrontController::class, 'contact'])->name('front.contact');
-Route::post('/contact-us', [FrontController::class, 'storeContactForm'])->name('contact_us.store');
+// Route::post('/contact-us', [FrontController::class, 'storeContactForm'])->name('contact_us.store');
+Route::post('/contact/store', [FrontController::class, 'storeContactForm'])->name('store.contact.form');
+
 
 Route::get('/appointment', [FrontController::class, 'appointment'])->name('front.appointment');
 Route::get('/attorneys', [FrontController::class, 'attorneys'])->name('front.attorneys');

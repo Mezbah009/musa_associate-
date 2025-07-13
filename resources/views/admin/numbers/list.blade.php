@@ -46,6 +46,7 @@
                             <th width="60">ID</th>
                             <th>Numbers</th>
                             <th>Email</th>
+                            <th>Address</th>
                             <th width="100">Action</th>
                         </tr>
                     </thead>
@@ -54,8 +55,9 @@
                         @foreach ($sections as $section)
                         <tr>
                             <td>{{$section->id}}</td>
-                            <td>{{$section->email}}</td>
                             <td>{{$section->phone}}</td>
+                            <td>{{$section->email}}</td>
+                            <td>{{$section->address}}</td>
                             {{-- <td>
                                 @if ($section->active == 'Yes')
                                 <svg class="text-success-500 h-6 w-6 text-success" xmlns="http://www.w3.org/2000/svg"

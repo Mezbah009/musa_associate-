@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 @section('content')
     <!-- Banner -->
-    <div class="banner-area banner-area-two banner-img-one">
+    {{-- <div class="banner-area banner-area-two banner-img-one">
         <div class="d-table">
             <div class="d-table-cell">
                 <div class="container">
@@ -10,7 +10,6 @@
                             <div class="col-lg-6">
                                 <div class="banner-item">
                                     <div class="banner-left">
-                                        {{-- <h1>Expert Tax Solutions for Growing Businesses</h1> --}}
                                         <h1>{{ $home_first_sections->title }}</h1>
                                         <p>{!! $home_first_sections->description !!}</p>
                                         <a href="{{ route('front.appointment') }}">Get Appointment
@@ -33,7 +32,46 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
+
+    @foreach ($home_first_section as $key => $home_first_sections)
+        <div class="banner-area banner-area-two"
+            style="background-image: url('{{ asset('uploads/first_section/' . $home_first_sections->logo) }}');
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: 830px;">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center">
+                            <div class="col-lg-6">
+                                <div class="banner-item">
+                                    <div class="banner-left">
+                                        <h1>{{ $home_first_sections->title }}</h1>
+                                        <p>{!! $home_first_sections->description !!}</p>
+                                        <a href="{{ route('front.appointment') }}">
+                                            Get Appointment <i class="icofont-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="banner-item">
+                                    <div class="banner-right">
+                                        <img class="banner-animation"
+                                            src="{{ asset('uploads/first_section/' . $home_first_sections->image) }}"
+                                            alt="Banner">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
     <!-- End Banner -->
 
 
@@ -124,11 +162,11 @@
                                             <li><i class="flaticon-checkmark"></i> Best Performances</li>
                                         </ul>
                                     </div>
-                                    <div class="help-signature">
+                                    {{-- <div class="help-signature">
                                         <img src="{{ asset('front-assets/assets/img/home-one/4.png') }}" alt="Signature">
                                     </div>
                                     <h3>Barrister Babatunde Smithi</h3>
-                                    <span>Founder and CEO</span>
+                                    <span>Founder and CEO</span> --}}
                                 </div>
                             </div>
                         </div>
@@ -352,10 +390,18 @@
                             </div>
                             <h3>Location</h3>
                             <ul>
-                                <li>2108-267 Dhaka, Bangladesh</li>
+                                @foreach ($numbers as $item)
+                                    @if ($item->address)
+                                        <li>
+                                            <a href="https://www.google.com/maps/search/{{ urlencode($item->address) }}"
+                                                target="_blank">
+                                                {{ $item->address }}
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
                             </ul>
-                            <a class="location-link" href="https://www.google.com/maps" target="_blank">View on gogle
-                                map</a>
+
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-4">
@@ -366,21 +412,13 @@
                             </div>
                             <h3>Email</h3>
                             <ul>
-                                <li>
-                                    <a
-                                        href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection#6b030e0707042b0712110445080406"><span
-                                            class="__cf_email__"
-                                            data-cfemail="670f020b0b08270b1e1d084904080a">associates@musa.com</span></a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection#a1c8cfc7cee1cdd8dbce8fc2cecc"><span
-                                            class="__cf_email__"
-                                            data-cfemail="cea7a0a8a18ea2b7b4a1e0ada1a3">musa@associates.com</span></a>
-                                </li>
+                                @foreach ($numbers as $item)
+                                    @if ($item->email)
+                                        <li><a href="mailto:{{ $item->email }}">{{ $item->email }}</a></li>
+                                    @endif
+                                @endforeach
                             </ul>
-                            <a class="location-link" href="https://www.google.com/maps" target="_blank">View on gogle
-                                map</a>
+
                         </div>
                     </div>
                     <div class="col-sm-6   col-lg-4">
@@ -391,15 +429,13 @@
                             </div>
                             <h3>Phone</h3>
                             <ul>
-                                <li>
-                                    <a href="tel:+0755543332322">+07 5554 3332 322</a>
-                                </li>
-                                <li>
-                                    <a href="tel:+0555962435736">+05 5596 2435 736</a>
-                                </li>
+                                @foreach ($numbers as $item)
+                                    @if ($item->phone)
+                                        <li><a href="tel:{{ $item->phone }}">{{ $item->phone }}</a></li>
+                                    @endif
+                                @endforeach
                             </ul>
-                            <a class="location-link" href="https://www.google.com/maps" target="_blank">View on gogle
-                                map</a>
+
                         </div>
                     </div>
                 </div>
@@ -408,12 +444,20 @@
         <!-- End Location -->
 
         <div class="container-fluid">
-            <form id="contactForm">
+            @if (session('success'))
+                <div class="alert alert-success text-center">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <form id="contactForm" method="POST" action="{{ route('store.contact.form') }}">
+                @csrf
                 <div class="row contact-wrap">
                     <div class="col-sm-6 col-lg-6">
                         <div class="form-group">
                             <input type="text" name="name" id="name" class="form-control" required
-                                data-error="Please enter your name" placeholder="Your Full Name">
+                                data-error="Please enter your name" placeholder="Your Full Name"
+                                value="{{ old('name') }}">
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
@@ -421,23 +465,26 @@
                     <div class="col-sm-6 col-lg-6">
                         <div class="form-group">
                             <input type="email" name="email" id="email" class="form-control" required
-                                data-error="Please enter your email" placeholder="Your Email">
+                                data-error="Please enter your email" placeholder="Your Email"
+                                value="{{ old('email') }}">
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
 
                     <div class="col-sm-6 col-lg-6">
                         <div class="form-group">
-                            <input type="text" name="phone_number" id="phone_number" required
-                                data-error="Please enter your number" class="form-control" placeholder="Your Phone">
+                            <input type="text" name="phone" id="phone" required
+                                data-error="Please enter your number" class="form-control" placeholder="Your Phone"
+                                value="{{ old('phone') }}">
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
 
                     <div class="col-sm-6 col-lg-6">
                         <div class="form-group">
-                            <input type="text" name="msg_subject" id="msg_subject" class="form-control" required
-                                data-error="Please enter your subject" placeholder="Subject">
+                            <input type="text" name="subject" id="subject" class="form-control" required
+                                data-error="Please enter your subject" placeholder="Subject"
+                                value="{{ old('subject') }}">
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
@@ -445,14 +492,30 @@
                     <div class="col-md-12 col-lg-12">
                         <div class="form-group">
                             <textarea name="message" class="form-control" id="message" cols="30" rows="8" required
-                                data-error="Write your message" placeholder="Case Description"></textarea>
+                                data-error="Write your message" placeholder="Case Description">{{ old('message') }}</textarea>
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
+                    <div class="col-md-12 col-lg-12">
+                        <div class="form-group">
+                            <div class="form-check agree-label">
+                                <input type="checkbox" name="gridCheck" id="gridCheck" value="1"
+                                    class="form-check-input @error('gridCheck') is-invalid @enderror" required>
+                                <label class="form-check-label" for="gridCheck">
+                                    Accept <a href="#">Terms & Conditions</a> and <a href="#">Privacy
+                                        Policy</a>.
+                                </label>
+                                @error('gridCheck')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
 
                     <div class="col-md-12 col-lg-12">
                         <div class="text-center">
-                            <button type="submit" class="contact-btn">Submit Case</button>
+                            <button type="submit" class="contact-btn">Submit Appointment</button>
                         </div>
                         <div id="msgSubmit" class="h3 text-center hidden"></div>
                         <div class="clearfix"></div>
@@ -460,6 +523,7 @@
                 </div>
             </form>
         </div>
+
     </div>
     <!-- End Contact Form -->
 

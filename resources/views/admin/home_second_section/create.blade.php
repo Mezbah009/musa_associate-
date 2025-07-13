@@ -37,7 +37,7 @@
                                 <textarea name="description" id="description" cols="30" rows="10" class="summernote" placeholder="Description"></textarea>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="button_name">Button Name</label>
                                 <input type="text" name="button_name" id="button_name" class="form-control"
@@ -50,19 +50,19 @@
                                 <input type="text" name="link" id="link" class="form-control" placeholder="Link">
                                 <p class="error"></p>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-md-6">
                             <div class="mb-1">
                                 <label for="image">Image</label>
                                 <input type="file" class="form-control-file" id="image" name="image">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div class="mb-1">
                                 <label for="logo">Logo</label>
                                 <input type="file" class="form-control-file" id="logo" name="logo">
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

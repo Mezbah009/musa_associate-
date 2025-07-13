@@ -29,7 +29,7 @@
                             <div class="mb-3">
                                 <label for="email">Email</label>
                                 <input type="text" name="email" id="email" class="form-control"
-                                    placeholder="Email" value="{{ $numbers->email }}">
+                                    placeholder="Email" value="{{ old('email', $numbers->email) }}">
                                 @error('email')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -39,8 +39,18 @@
                             <div class="mb-3">
                                 <label for="phone">Phone</label>
                                 <input type="text" name="phone" id="phone" class="form-control"
-                                    placeholder="Phone" value="{{ $numbers->phone }}">
+                                    placeholder="Phone" value="{{ old('phone', $numbers->phone) }}">
                                 @error('phone')
+                                <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="address">Address</label>
+                                <input type="text" name="address" id="address" class="form-control"
+                                    placeholder="Address" value="{{ old('address', $numbers->address) }}">
+                                @error('address')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -55,6 +65,7 @@
         </div>
     </form>
 </section>
+
 
 
 

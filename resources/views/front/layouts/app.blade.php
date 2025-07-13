@@ -167,7 +167,7 @@
 
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-sm-6 col-lg-6">
+                <div class="col-sm-6 col-lg-5">
                     <div class="footer-item">
                         <div class="footer-logo">
                             <a href="index-2.html#">
@@ -242,28 +242,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-lg-3">
+                <div class="col-sm-6 col-lg-4">
                     <div class="footer-item">
                         <div class="footer-find">
                             <h3>Find Us</h3>
                             <ul>
-                                <!-- Static or optional dynamic address -->
-                                <li>
-                                    <i class="icofont-location-pin"></i>
-                                    {{ siteSetting()->meta_title ?? '28/A Dhaka, Bangladesh' }}
-                                </li>
-
-                                <!-- Dynamic phone -->
                                 @foreach (numbers() as $item)
+                                    @if ($item->address)
+                                        <li>
+                                            <i class="icofont-location-pin"></i>
+                                            {{ $item->address }}
+                                        </li>
+                                    @endif
+
                                     @if ($item->phone)
                                         <li>
                                             <i class="icofont-ui-call"></i>
                                             <a href="tel:{{ $item->phone }}">{{ $item->phone }}</a>
                                         </li>
                                     @endif
-                                @endforeach
 
-                                @foreach (numbers() as $item)
                                     @if ($item->email)
                                         <li>
                                             <i class="icofont-email"></i>
@@ -271,11 +269,11 @@
                                         </li>
                                     @endif
                                 @endforeach
-
                             </ul>
                         </div>
                     </div>
                 </div>
+
             </div>
             <div class="copyright-area">
                 <div class="row justify-content-center">
@@ -313,7 +311,7 @@
     <!-- Form Validator JS -->
     <script src="{{ asset('front-assets/assets/js/form-validator.min.js') }}"></script>
     <!-- Contact JS -->
-    <script src="{{ asset('front-assets/assets/js/contact-form-script.js') }}"></script>
+    {{-- <script src="{{ asset('front-assets/assets/js/contact-form-script.js') }}"></script> --}}
     <!-- Owl Carousel JS -->
     <script src="{{ asset('front-assets/assets/js/owl.carousel.min.js') }}"></script>
     <!-- Odometer JS -->

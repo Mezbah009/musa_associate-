@@ -44,6 +44,16 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="address">Address</label>
+                                <input type="text" name="address" id="address" class="form-control"
+                                    placeholder="Address" value="{{ old('address') }}">
+                                @error('address')
+                                <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,6 +64,7 @@
         </div>
     </form>
 </section>
+
 <!-- /.content -->
 @endsection
 @section('customJs')

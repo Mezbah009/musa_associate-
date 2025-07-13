@@ -45,8 +45,10 @@ class FrontController extends Controller
         $data['caseStudy'] = $caseStudy;
 
         $practice = Practice::orderBy('id', 'asc')->take(6)->get();
-
         $data['practice'] = $practice;
+
+        $numbers = Number::latest()->take(1)->get();
+        $data['numbers'] = $numbers;
 
         return view('front.home', $data);
     }
@@ -65,9 +67,9 @@ class FrontController extends Controller
 
 
 
-     public function contact()
+    public function contact()
     {
-       $numbers = Number::latest()->take(2)->get();
+        $numbers = Number::latest()->take(1)->get();
         $data['numbers'] = $numbers;
         return view('front.contact', $data);
     }
@@ -95,11 +97,11 @@ class FrontController extends Controller
         return view('front.practice', $data);
     }
 
-  public function practiceDetails($slug)
-{
-    $practice = Practice::where('slug', $slug)->firstOrFail();
-    return view('front.practice-details', compact('practice'));
-}
+    public function practiceDetails($slug)
+    {
+        $practice = Practice::where('slug', $slug)->firstOrFail();
+        return view('front.practice-details', compact('practice'));
+    }
 
 
     public function caseStudy()
@@ -324,4 +326,31 @@ class FrontController extends Controller
 
     //     return redirect()->back()->with('success', 'Your message has been sent. Thank you!');
     // }
+
+
+    public function storeContactForm(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => 'required|string|max:20',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+            'gridCheck' => 'accepted', // ✅ for checkbox only
+        ]);
+
+        // ✅ Save only required fields (exclude gridCheck)
+        $contact = ContactForm::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'subject' => $request->subject,
+            'message' => $request->message,
+        ]);
+
+        // Mail sending (optional)
+        // Mail::to('hmezbahoffice@gmail.com')->send(new ContactFormSubmitted($contact));
+
+        return redirect()->back()->with('success', 'Your message has been sent. Thank you!');
+    }
 }

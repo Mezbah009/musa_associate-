@@ -45,7 +45,7 @@
                         <tr>
                             <th width="60">ID</th>
                             <th>Image</th>
-                            <th>Logo</th>
+                            {{-- <th>Logo</th> --}}
                             <th>Title</th>
                             <th width="100">Action</th>
                         </tr>
@@ -64,7 +64,7 @@
                                     alt="default image" width="50">
                                 @endif
                             </td>
-                            <td>
+                            {{-- <td>
                                 @if(!empty($section->logo))
                                 <img src="{{asset('uploads/first_section/'.$section->logo)}}" class="img-thumbnail"
                                     alt="{{$section->title}}" width="50">
@@ -72,7 +72,7 @@
                                 <img src="{{asset('admin-assets/img/default.png')}}" class="img-thumbnail"
                                     alt="default image" width="50">
                                 @endif
-                            </td>
+                            </td> --}}
                             <td>{{$section->title}}</td>
                             {{-- <td>
                                 @if ($section->active == 'Yes')

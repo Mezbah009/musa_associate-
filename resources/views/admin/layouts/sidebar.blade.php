@@ -1,11 +1,14 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('admin.dashboard') }}" class="brand-link">
-        <img src="{{ asset('admin-assets/img/dashboard-logo.png') }}" alt="AdminLTE Logo"
-            class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Musa & Associates</span>
+        <img src="{{ !empty(siteSetting()->favicon) ? asset('uploads/favicon/' . siteSetting()->favicon) : asset('admin-assets/img/dashboard-logo.png') }}"
+            alt="logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">
+            {{ siteSetting()->copyright_text ?? 'Dashboard' }}
+        </span>
     </a>
-    <!-- Sidebar -->
+
+    <!-- Sidebar ---->
     <div class="sidebar">
         <!-- Sidebar user (optional) -->
         <nav class="mt-2">
@@ -34,12 +37,12 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('sliders.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-camera"></i>
                                 <p>Slider</p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a href="{{ route('home_first_sections.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-info-circle"></i>
@@ -59,12 +62,12 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('home-third-sections.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-info-circle"></i>
                                 <p>Home third Section</p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a href="{{ route('testimonials.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-quote-left"></i>
@@ -91,7 +94,7 @@
                                 <p>About First Section</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('journeys.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-route"></i> <!-- Represents a journey or path -->
                                 <p>Our Journey</p>
@@ -128,20 +131,20 @@
                                 <i class="nav-icon fas fa-shield-alt"></i>
                                 <p>Quality Section</p>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 <!--Product -->
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('products.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-box"></i>
                         <p>Product</p>
                     </a>
-                </li>
+                </li> --}}
 
 
                 <!--Category Management -->
-                <li class="nav-item has-treeview">
+                {{-- <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-layer-group"></i>
 
@@ -170,17 +173,30 @@
                             </a>
                         </li>
                     </ul>
+                </li> --}}
+
+                <li class="nav-item">
+                    <a href="{{ route('practices.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-newspaper"></i>
+                        <p>Practices</p>
+                    </a>
                 </li>
 
 
                 <li class="nav-item">
                     <a href="{{ route('team_members.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-user-friends"></i>
-                        <p>Team Member</p>
+                        <p>Attorneys</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.contact.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-envelope"></i>
+                        <p>Appointment</p>
                     </a>
                 </li>
 
-                <li class="nav-item has-treeview">
+                {{-- <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-handshake"></i>
 
@@ -204,14 +220,14 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('services.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>Service</p>
                     </a>
-                </li>
+                </li> --}}
 
 
                 <!-- Blogs menu with submenus -->
@@ -270,12 +286,7 @@
                         <p>Newsletter</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.contact.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-envelope"></i>
-                        <p>Contact Messages</p>
-                    </a>
-                </li>
+
 
                 <li class="nav-item">
                     <a href="{{ route('casestudy.index') }}" class="nav-link">
@@ -284,28 +295,24 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('practices.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-newspaper"></i>
-                        <p>Practices</p>
-                    </a>
-                </li>
-                <li class="nav-item">
+
+                {{-- <li class="nav-item">
                     <a href="{{ route('jobs.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-briefcase"></i>
                         <p>Jobs</p>
                     </a>
-                </li>
-                <li class="nav-item">
+                </li> --}}
+                {{-- <li class="nav-item">
                     <a href="{{ route('contact.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-envelope"></i>
                         <p>Contact Us</p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="{{ route('numbers.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-phone"></i>
-                        <p>Numbers & Email</p>
+                        {{-- <p>Numbers & Email</p> --}}
+                        <p>Contact Us</p>
                     </a>
                 </li>
                 {{--

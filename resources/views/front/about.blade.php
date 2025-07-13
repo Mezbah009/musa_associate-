@@ -5,7 +5,7 @@
         <div class="d-table">
             <div class="d-table-cell">
                 <div class="page-title-text">
-                    <h2>About Our Firm and History</h2>
+                    <h2>About Us</h2>
                     <ul>
                         <li>
                             <a href="{{ route('front.home') }}">Home</a>
@@ -56,11 +56,11 @@
                                             <li><i class="flaticon-checkmark"></i> Best Performances</li>
                                         </ul>
                                     </div>
-                                    <div class="help-signature">
+                                    {{-- <div class="help-signature">
                                         <img src="{{ asset('front-assets/assets/img/home-one/4.png') }}" alt="Signature">
                                     </div>
                                     <h3>Barrister Babatunde Smithi</h3>
-                                    <span>Founder and CEO</span>
+                                    <span>Founder and CEO</span> --}}
                                 </div>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
     <!-- End Expertise -->
 
     <!-- About -->
-    <div class="about-area pt-100">
+    {{-- <div class="about-area pt-100">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
@@ -206,6 +206,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- End About -->
+
+    <br><br><br><br>
+    <br><br><br><br>
 @endsection

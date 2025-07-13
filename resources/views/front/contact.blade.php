@@ -1,7 +1,7 @@
-  @extends('front.layouts.app')
+@extends('front.layouts.app')
 @section('content')
 
- <!-- Page Title -->
+<!-- Page Title -->
         <div class="page-title-area page-title-area-two title-img-one">
             <div class="d-table">
                 <div class="d-table-cell">
@@ -25,61 +25,69 @@
         <!-- Contact Form -->
     <div class="contact-form contact-form-four pb-100">
     <!-- Location -->
-    <div class="loaction-area">
-        <div class="container">
-            <div class="row location-bg">
-                <!-- Location (static) -->
-                <div class="col-sm-6 col-lg-4">
-                    <div class="location-item">
-                        <div class="location-icon">
-                            <i class="flaticon-pin"></i>
+        <div class="loaction-area">
+            <div class="container">
+                <div class="row location-bg">
+                    <!-- Location (static) -->
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="location-item">
+                            <div class="location-icon">
+                                <i class="flaticon-pin"></i>
+                            </div>
+                            <h3>Location</h3>
+                            <ul>
+                                @foreach ($numbers as $item)
+                                    @if ($item->address)
+                                        <li>
+                                            <a href="https://www.google.com/maps/search/{{ urlencode($item->address) }}" target="_blank">
+                                                {{ $item->address }}
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
                         </div>
-                        <h3>Location</h3>
-                        <ul>
-                            <li>2108-267 Dhaka, Bangladesh</li>
-                        </ul>
                     </div>
-                </div>
 
-                <!-- Phone (dynamic) -->
-                <div class="col-sm-6 col-lg-4">
-                    <div class="location-item">
-                        <div class="location-icon">
-                            <i class="flaticon-call"></i>
+                    <!-- Phone (dynamic) -->
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="location-item">
+                            <div class="location-icon">
+                                <i class="flaticon-call"></i>
+                            </div>
+                            <h3>Phone</h3>
+                            <ul>
+                                @foreach ($numbers as $item)
+                                    @if ($item->phone)
+                                        <li><a href="tel:{{ $item->phone }}">{{ $item->phone }}</a></li>
+                                    @endif
+                                @endforeach
+                            </ul>
                         </div>
-                        <h3>Phone</h3>
-                        <ul>
-                            @foreach ($numbers as $item)
-                                @if ($item->phone)
-                                    <li><a href="tel:{{ $item->phone }}">{{ $item->phone }}</a></li>
-                                @endif
-                            @endforeach
-                        </ul>
                     </div>
-                </div>
 
-                <!-- Email (dynamic) -->
-                <div class="col-sm-6 col-lg-4">
-                    <div class="location-item">
-                        <div class="location-icon">
-                            <i class="flaticon-email"></i>
+                    <!-- Email (dynamic) -->
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="location-item">
+                            <div class="location-icon">
+                                <i class="flaticon-email"></i>
+                            </div>
+                            <h3>Email</h3>
+                            <ul>
+                                @foreach ($numbers as $item)
+                                    @if ($item->email)
+                                        <li><a href="mailto:{{ $item->email }}">{{ $item->email }}</a></li>
+                                    @endif
+                                @endforeach
+                            </ul>
                         </div>
-                        <h3>Email</h3>
-                        <ul>
-                            @foreach ($numbers as $item)
-                                @if ($item->email)
-                                    <li><a href="mailto:{{ $item->email }}">{{ $item->email }}</a></li>
-                                @endif
-                            @endforeach
-                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-            <!-- End Location -->
+    <!-- End Location -->
 
             <div class="container-fluid">
                 <form id="contactForm">
@@ -130,7 +138,7 @@
                                     required
                                 >
                                 <label class="form-check-label" for="gridCheck">
-                                    Accept <a href="">Terms & Conditions</a> And <a href="privacy-policy.html">Privacy Policy.</a>
+                                    Accept <a href="https://templates.hibootstrap.com/lyzo/default/terms-condition.html">Terms & Conditions</a> And <a href="privacy-policy.html">Privacy Policy.</a>
                                 </label>
                                 <div class="help-block with-errors gridCheck-error"></div>
                             </div>
@@ -147,7 +155,9 @@
                 </form>
             </div>
         </div>
+        </div>
         <!-- End Contact Form -->
+       <br>
 
         <!-- Start Map Area -->
 		<div class="map-area">
