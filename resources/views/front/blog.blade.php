@@ -23,287 +23,82 @@
         <!-- End Page Title -->
 
         <!-- Blog -->
-        <section class="blog-area blog-area-two  pt-100">
-            <div class="container">
-                <div class="row justify-content-center">
+  <section class="blog-area blog-area-two pt-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                @forelse($blogs as $blog)
                     <div class="col-sm-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".3s">
-                            <a href="blog-details.html">
-                                <img src="{{ asset('front-assets/assets/img/home-one/blog/1.jpg') }}" alt="Blog">
+                        <div class="blog-item wow fadeInUp" data-wow-delay=".{{ $loop->index + 3 }}s">
+                            <a href="{{ route('front.blog.details', $blog->slug) }}">
+                                <img src="{{ asset('uploads/blogs/' . $blog->feature_image) }}" alt="{{ $blog->title }}">
                             </a>
                             <div class="blog-inner">
-                                <span>Rights Case</span>
+                                <span>
+                                    {{ optional($blog->categories->first())->name ?? 'Uncategorized' }}
+                                </span>
                                 <h3>
-                                    <a href="blog-details.html">Justice May For You If You Are Innocent</a>
+                                    <a href="{{ route('front.blog.details', $blog->slug) }}">
+                                        {{ Str::limit($blog->title, 70) }}
+                                    </a>
                                 </h3>
                                 <ul>
                                     <li>
                                         <i class="icofont-calendar"></i>
-                                        20 Feb 2024
+                                        {{ \Carbon\Carbon::parse($blog->published_at)->format('d M Y') }}
                                     </li>
                                     <li>
                                         <i class="icofont-user-alt-7"></i>
-                                        <a href="blog.html#">John Doe</a>
+                                        <a href="#">{{ $blog->author->name ?? 'Unknown Author' }}</a>
                                     </li>
                                 </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut labore.</p>
-                                <a class="blog-link" href="blog-details.html">
+                                <p>{{ Str::limit($blog->excerpt ?? strip_tags($blog->content), 100) }}</p>
+                                <a class="blog-link" href="{{ route('front.blog.details', $blog->slug) }}">
                                     Read More
                                     <i class="icofont-simple-right"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".4s">
-                            <a href="blog-details.html">
-                                <img src="{{ asset('front-assets/assets/img/home-one/blog/2.jpg') }}" alt="Blog">
-                            </a>
-                            <div class="blog-inner">
-                                <span>Business Case</span>
-                                <h3>
-                                    <a href="blog-details.html">By Whom Your Business Is Being Loss?</a>
-                                </h3>
-                                <ul>
-                                    <li>
-                                        <i class="icofont-calendar"></i>
-                                        20 Feb 2024
-                                    </li>
-                                    <li>
-                                        <i class="icofont-user-alt-7"></i>
-                                        <a href="blog.html#">John Doe</a>
-                                    </li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut labore.</p>
-                                <a class="blog-link" href="blog-details.html">
-                                    Read More
-                                    <i class="icofont-simple-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".5s">
-                            <a href="blog-details.html">
-                                <img src="{{ asset('front-assets/assets/img/home-one/blog/3.jpg') }}" alt="Blog">
-                            </a>
-                            <div class="blog-inner">
-                                <span>Criminal Case</span>
-                                <h3>
-                                    <a href="blog-details.html">Who Can The Victim A Sue After A Car Accident?</a>
-                                </h3>
-                                <ul>
-                                    <li>
-                                        <i class="icofont-calendar"></i>
-                                        20 Feb 2024
-                                    </li>
-                                    <li>
-                                        <i class="icofont-user-alt-7"></i>
-                                        <a href="blog.html#">John Doe</a>
-                                    </li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut labore.</p>
-                                <a class="blog-link" href="blog-details.html">
-                                    Read More
-                                    <i class="icofont-simple-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".3s">
-                            <a href="blog-details.html">
-                                <img src="{{ asset('front-assets/assets/img/home-one/blog/4.jpg') }}" alt="Blog">
-                            </a>
-                            <div class="blog-inner">
-                                <span>People Case</span>
-                                <h3>
-                                    <a href="blog-details.html">Why Are People Doing Crime Day By Day?</a>
-                                </h3>
-                                <ul>
-                                    <li>
-                                        <i class="icofont-calendar"></i>
-                                        20 Feb 2024
-                                    </li>
-                                    <li>
-                                        <i class="icofont-user-alt-7"></i>
-                                        <a href="blog.html#">John Doe</a>
-                                    </li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut labore.</p>
-                                <a class="blog-link" href="blog-details.html">
-                                    Read More
-                                    <i class="icofont-simple-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".4s">
-                            <a href="blog-details.html">
-                                <img src="{{ asset('front-assets/assets/img/home-one/blog/5.jpg') }}" alt="Blog">
-                            </a>
-                            <div class="blog-inner">
-                                <span>Society Case</span>
-                                <h3>
-                                    <a href="blog-details.html">Why Is Crime Increasing In Our Society Now?</a>
-                                </h3>
-                                <ul>
-                                    <li>
-                                        <i class="icofont-calendar"></i>
-                                        20 Feb 2024
-                                    </li>
-                                    <li>
-                                        <i class="icofont-user-alt-7"></i>
-                                        <a href="blog.html#">John Doe</a>
-                                    </li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut labore.</p>
-                                <a class="blog-link" href="blog-details.html">
-                                    Read More
-                                    <i class="icofont-simple-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".5s">
-                            <a href="blog-details.html">
-                                <img src="{{ asset('front-assets/assets/img/home-one/blog/6.jpg') }}" alt="Blog">
-                            </a>
-                            <div class="blog-inner">
-                                <span>Government Case</span>
-                                <h3>
-                                    <a href="blog-details.html">Will The Government Prevent These Crimes?</a>
-                                </h3>
-                                <ul>
-                                    <li>
-                                        <i class="icofont-calendar"></i>
-                                        20 Feb 2024
-                                    </li>
-                                    <li>
-                                        <i class="icofont-user-alt-7"></i>
-                                        <a href="blog.html#">John Doe</a>
-                                    </li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut labore.</p>
-                                <a class="blog-link" href="blog-details.html">
-                                    Read More
-                                    <i class="icofont-simple-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".3s">
-                            <a href="blog-details.html">
-                                <img src="{{ asset('front-assets/assets/img/home-one/blog/7.jpg') }}" alt="Blog">
-                            </a>
-                            <div class="blog-inner">
-                                <span>Corrupted Case</span>
-                                <h3>
-                                    <a href="blog-details.html">The Society Is Being Corrupted Because Of Crime</a>
-                                </h3>
-                                <ul>
-                                    <li>
-                                        <i class="icofont-calendar"></i>
-                                        20 Feb 2024
-                                    </li>
-                                    <li>
-                                        <i class="icofont-user-alt-7"></i>
-                                        <a href="blog.html#">John Doe</a>
-                                    </li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut labore.</p>
-                                <a class="blog-link" href="blog-details.html">
-                                    Read More
-                                    <i class="icofont-simple-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".4s">
-                            <a href="blog-details.html">
-                                <img src="{{ asset('front-assets/assets/img/home-one/blog/8.jpg') }}" alt="Blog">
-                            </a>
-                            <div class="blog-inner">
-                                <span>Justice Case</span>
-                                <h3>
-                                    <a href="blog-details.html">You Will Get Justice If You Are Innocent</a>
-                                </h3>
-                                <ul>
-                                    <li>
-                                        <i class="icofont-calendar"></i>
-                                        20 Feb 2024
-                                    </li>
-                                    <li>
-                                        <i class="icofont-user-alt-7"></i>
-                                        <a href="blog.html#">John Doe</a>
-                                    </li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut labore.</p>
-                                <a class="blog-link" href="blog-details.html">
-                                    Read More
-                                    <i class="icofont-simple-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6   col-lg-4">
-                        <div class="blog-item wow fadeInUp" data-wow-delay=".5s">
-                            <a href="blog-details.html">
-                                <img src="{{ asset('front-assets/assets/img/home-one/blog/9.jpg') }}" alt="Blog">
-                            </a>
-                            <div class="blog-inner">
-                                <span>Crime Case</span>
-                                <h3>
-                                    <a href="blog-details.html">Stay Far From Crime Aware About Law</a>
-                                </h3>
-                                <ul>
-                                    <li>
-                                        <i class="icofont-calendar"></i>
-                                        20 Feb 2024
-                                    </li>
-                                    <li>
-                                        <i class="icofont-user-alt-7"></i>
-                                        <a href="blog.html#">John Doe</a>
-                                    </li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut labore.</p>
-                                <a class="blog-link" href="blog-details.html">
-                                    Read More
-                                    <i class="icofont-simple-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="case-pagination">
-                    <ul>
-                        <li>
-                            <a href="blog.html">
-                                <i class="icofont-simple-left"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="blog.html">1</a>
-                        </li>
-                        <li>
-                            <a href="blog.html">2</a>
-                        </li>
-                        <li>
-                            <a href="blog.html">3</a>
-                        </li>
-                        <li>
-                            <a href="blog.html">
-                                <i class="icofont-simple-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                @empty
+                    <p class="text-center">No blogs available.</p>
+                @endforelse
             </div>
-        </section>
+
+           <div class="case-pagination">
+    <ul>
+        {{-- Previous Page Link --}}
+        <li>
+            @if ($blogs->onFirstPage())
+                <span><i class="icofont-simple-left"></i></span>
+            @else
+                <a href="{{ $blogs->previousPageUrl() }}"><i class="icofont-simple-left"></i></a>
+            @endif
+        </li>
+
+        {{-- Pagination Elements --}}
+        @for ($i = 1; $i <= $blogs->lastPage(); $i++)
+            <li>
+                @if ($i == $blogs->currentPage())
+                    <span class="active">{{ $i }}</span>
+                @else
+                    <a href="{{ $blogs->url($i) }}">{{ $i }}</a>
+                @endif
+            </li>
+        @endfor
+
+        {{-- Next Page Link --}}
+        <li>
+            @if ($blogs->hasMorePages())
+                <a href="{{ $blogs->nextPageUrl() }}"><i class="icofont-simple-right"></i></a>
+            @else
+                <span><i class="icofont-simple-right"></i></span>
+            @endif
+        </li>
+    </ul>
+</div>
+
+        </div>
+    </section>
         <!-- End Blog -->
 
 

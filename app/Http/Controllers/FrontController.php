@@ -124,10 +124,10 @@ class FrontController extends Controller
     }
 
 
-    public function blog()
-    {
-        return view('front.blog');
-    }
+    // public function blog()
+    // {
+    //     return view('front.blog');
+    // }
 
 
 
@@ -143,20 +143,38 @@ class FrontController extends Controller
 
 
 
+     public function blog()
+    {
+        $blogs = Blog::with(['author', 'categories'])
+            ->where('is_published', true)
+            ->orderByDesc('published_at')
+            ->paginate(6); // Or whatever number per page you want
+
+        return view('front.blog', compact('blogs'));
+    }
+
+    // public function blogDetails($slug)
+    // {
+    //     $blog = Blog::with(['author', 'categories', 'tags'])->where('slug', $slug)->firstOrFail();
+
+    //     return view('front.blog-details', compact('blog'));
+    // }
+
+
 
     // //------------blog section--------------------
-    // private function getSidebarData()
-    // {
-    //     return [
-    //         'categories' => BlogCategory::withCount('blogs')->get(),
-    //         'recentPosts' => Blog::where('is_published', 1)
-    //             ->whereNotNull('published_at')
-    //             ->latest()
-    //             ->take(5)
-    //             ->get(),
-    //         'tags' => BlogTag::withCount('blogs')->get(),
-    //     ];
-    // }
+    private function getSidebarData()
+    {
+        return [
+            'categories' => BlogCategory::withCount('blogs')->get(),
+            'recentPosts' => Blog::where('is_published', 1)
+                ->whereNotNull('published_at')
+                ->latest()
+                ->take(5)
+                ->get(),
+            'tags' => BlogTag::withCount('blogs')->get(),
+        ];
+    }
 
     // public function blog()
     // {
@@ -171,104 +189,104 @@ class FrontController extends Controller
     //     return view('front.blog', array_merge(['blogs' => $blogs], $data));
     // }
 
-    // public function categoryWiseBlog($id)
-    // {
-    //     $category = BlogCategory::findOrFail($id);
-    //     $blogs = $category->blogs()
-    //         ->with(['categories', 'tags', 'author'])
-    //         ->where('is_published', 1)
-    //         ->whereNotNull('published_at')
-    //         ->latest()
-    //         ->paginate(4);
-    //     $data = $this->getSidebarData();
+    public function categoryWiseBlog($id)
+    {
+        $category = BlogCategory::findOrFail($id);
+        $blogs = $category->blogs()
+            ->with(['categories', 'tags', 'author'])
+            ->where('is_published', 1)
+            ->whereNotNull('published_at')
+            ->latest()
+            ->paginate(4);
+        $data = $this->getSidebarData();
 
-    //     return view('front.blog', array_merge(['blogs' => $blogs, 'category' => $category], $data));
-    // }
+        return view('front.blog', array_merge(['blogs' => $blogs, 'category' => $category], $data));
+    }
 
-    // public function tagWiseBlog($id)
-    // {
-    //     $tag = BlogTag::findOrFail($id);
-    //     $blogs = $tag->blogs()
-    //         ->with(['categories', 'tags', 'author'])
-    //         ->where('is_published', 1)
-    //         ->whereNotNull('published_at')
-    //         ->latest()
-    //         ->paginate(4);
-    //     $data = $this->getSidebarData();
+    public function tagWiseBlog($id)
+    {
+        $tag = BlogTag::findOrFail($id);
+        $blogs = $tag->blogs()
+            ->with(['categories', 'tags', 'author'])
+            ->where('is_published', 1)
+            ->whereNotNull('published_at')
+            ->latest()
+            ->paginate(4);
+        $data = $this->getSidebarData();
 
-    //     return view('front.blog', array_merge(['blogs' => $blogs, 'tag' => $tag], $data));
-    // }
-
-
-    // public function searchBlog(Request $request)
-    // {
-    //     $query = $request->input('q');
-
-    //     $blogs = Blog::with(['categories', 'tags', 'author'])
-    //         ->where(function ($qBuilder) use ($query) {
-    //             $qBuilder->where('title', 'like', "%{$query}%")
-    //                 ->orWhere('slug', 'like', "%{$query}%")
-    //                 ->orWhere('content', 'like', "%{$query}%");
-    //         })
-    //         ->latest()
-    //         ->paginate(4);
+        return view('front.blog', array_merge(['blogs' => $blogs, 'tag' => $tag], $data));
+    }
 
 
-    //     $blogs->appends(['q' => $query]);
+    public function searchBlog(Request $request)
+    {
+        $query = $request->input('q');
+
+        $blogs = Blog::with(['categories', 'tags', 'author'])
+            ->where(function ($qBuilder) use ($query) {
+                $qBuilder->where('title', 'like', "%{$query}%")
+                    ->orWhere('slug', 'like', "%{$query}%")
+                    ->orWhere('content', 'like', "%{$query}%");
+            })
+            ->latest()
+            ->paginate(4);
 
 
-
-    //     $data = $this->getSidebarData();
-
-    //     return view('front.blog', array_merge(['blogs' => $blogs, 'query' => $query], $data));
-    // }
+        $blogs->appends(['q' => $query]);
 
 
 
-    // public function blogDetails($slug)
-    // {
-    //     $blog = Blog::where('slug', $slug)
-    //         ->where('is_published', true)
-    //         ->whereNotNull('published_at')
-    //         ->firstOrFail();
+        $data = $this->getSidebarData();
 
-    //     $categories = BlogCategory::withCount('blogs')->get();
-
-    //     $recentPosts = Blog::where('is_published', true)
-    //         ->whereNotNull('published_at')
-    //         ->latest()
-    //         ->take(5)
-    //         ->get();
-
-    //     $tags = BlogTag::withCount('blogs')->get();
-
-    //     $comments = $blog->comments()
-    //         ->whereNull('parent_id')
-    //         ->with('replies')
-    //         ->get();
-
-    //     return view('front.blog-details', compact('blog', 'categories', 'recentPosts', 'tags', 'comments'));
-    // }
+        return view('front.blog', array_merge(['blogs' => $blogs, 'query' => $query], $data));
+    }
 
 
 
+    public function blogDetails($slug)
+    {
+        $blog = Blog::where('slug', $slug)
+            ->where('is_published', true)
+            ->whereNotNull('published_at')
+            ->firstOrFail();
 
-    // public function storeComment(Request $request)
-    // {
-    //     $validated = $request->validate([
-    //         'blog_id' => 'required|exists:blogs,id',
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'nullable|email',
-    //         'website' => 'nullable|url',
-    //         'comment' => 'required|string',
-    //         'parent_id' => 'nullable|exists:comments,id',
+        $categories = BlogCategory::withCount('blogs')->get();
 
-    //     ]);
+        $recentPosts = Blog::where('is_published', true)
+            ->whereNotNull('published_at')
+            ->latest()
+            ->take(5)
+            ->get();
 
-    //     Comment::create($validated);
+        $tags = BlogTag::withCount('blogs')->get();
 
-    //     return back()->with('success', 'Your comment has been posted.');
-    // }
+        $comments = $blog->comments()
+            ->whereNull('parent_id')
+            ->with('replies')
+            ->get();
+
+        return view('front.blog-details', compact('blog', 'categories', 'recentPosts', 'tags', 'comments'));
+    }
+
+
+
+
+    public function storeComment(Request $request)
+    {
+        $validated = $request->validate([
+            'blog_id' => 'required|exists:blogs,id',
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email',
+            'website' => 'nullable|url',
+            'comment' => 'required|string',
+            'parent_id' => 'nullable|exists:comments,id',
+
+        ]);
+
+        Comment::create($validated);
+
+        return back()->with('success', 'Your comment has been posted.');
+    }
 
     // //------------end blog section--------------------
 
