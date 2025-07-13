@@ -151,18 +151,25 @@
             <div class="container">
                 <img src="{{ asset('front-assets/assets/img/home-one/newsletter.png') }}" alt="Shape">
                 <h2>Subscribe Newsletter</h2>
-                <form class="newsletter-form" data-toggle="validator">
-                    <input type="email" class="form-control" placeholder="Enter Your Email" name="EMAIL" required
-                        autocomplete="off">
 
-                    <button class="btn contact-btn" type="submit">
-                        Subscribe
-                    </button>
+                <!-- Added method, action, csrf, and fixed input name -->
+                <form class="laravel-newsletter-form" id="laravel-newsletter-form" method="POST" action="{{ route('newsletter.subscribe') }}">
+                    @csrf
+                    <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                    <button type="submit" class="btn contact-btn">Subscribe</button>
 
-                    <div id="validator-newsletter" class="form-result"></div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger mt-2">{{ $errors->first('email') }}</div>
+                    @endif
+
+                    @if (session('newsletter_success'))
+                        <div class="alert alert-success mt-2">{{ session('newsletter_success') }}</div>
+                    @endif
                 </form>
+
             </div>
         </div>
+
         <!-- End Newsletter -->
 
         <div class="container">

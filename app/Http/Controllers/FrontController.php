@@ -275,26 +275,21 @@ class FrontController extends Controller
 
     // //------------newsletter section--------------------
 
-    // public function subscribe(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'email' => 'required|email|unique:newsletters,email',
-    //     ]);
+public function subscribe(Request $request)
+{
+    // Validate email field
+    $request->validate([
+        'email' => 'required|email|unique:newsletters,email',
+    ]);
 
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'status' => false,
-    //             'message' => $validator->errors()->first(),
-    //         ]);
-    //     }
+    // Store subscriber
+    Newsletter::create([
+        'email' => $request->email,
+    ]);
 
-    //     Newsletter::create([
-    //         'email' => $request->email,
-    //     ]);
-
-    //     return redirect()->back()->with('newsletter_success', 'You have successfully subscribed to our newsletter!');
-    // }
-
+    // Redirect with success message
+    return redirect()->back()->with('newsletter_success', 'You have successfully subscribed to our newsletter!');
+}
 
 
 
@@ -307,25 +302,6 @@ class FrontController extends Controller
     //     return view('front.contact', $data);
     // }
 
-
-    // public function storeContactForm(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'email' => 'required|email',
-    //         'phone' => 'required',
-    //         'company_name' => 'required',
-    //         'message' => 'required',
-    //         'employee_count' => 'required'
-    //     ]);
-
-    //     $contact = ContactForm::create($request->all());
-
-    //     // Send to admin email
-    //     Mail::to('info@goldfish-hr.com')->send(new ContactFormSubmitted($contact));
-
-    //     return redirect()->back()->with('success', 'Your message has been sent. Thank you!');
-    // }
 
 
     public function storeContactForm(Request $request)

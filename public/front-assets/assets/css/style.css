@@ -1284,11 +1284,11 @@ button:focus {
   color: #ffffff;
   margin-bottom: 30px;
 }
-.newsletter-area .newsletter-form {
+.newsletter-area .laravel-newsletter-form {
   position: relative;
   max-width: 490px;
 }
-.newsletter-area .newsletter-form .form-control {
+.newsletter-area .laravel-newsletter-form .form-control {
   height: 46px;
   border-radius: 0;
   border: 1px solid #b69d74;
@@ -1297,20 +1297,20 @@ button:focus {
   color: #ffffff;
   font-size: 15px;
 }
-.newsletter-area .newsletter-form .form-control:focus {
+.newsletter-area .laravel-newsletter-form .form-control:focus {
   box-shadow: none;
 }
-.newsletter-area .newsletter-form .validation-danger {
+.newsletter-area .laravel-newsletter-form .validation-danger {
   color: #dc3545;
   margin-top: 10px;
 }
-.newsletter-area .newsletter-form ::-moz-placeholder {
+.newsletter-area .laravel-newsletter-form ::-moz-placeholder {
   color: #a9a3a3;
 }
-.newsletter-area .newsletter-form ::placeholder {
+.newsletter-area .laravel-newsletter-form ::placeholder {
   color: #a9a3a3;
 }
-.newsletter-area .newsletter-form .contact-btn {
+.newsletter-area .laravel-newsletter-form .contact-btn {
   position: absolute;
   top: 0;
   right: 0;
