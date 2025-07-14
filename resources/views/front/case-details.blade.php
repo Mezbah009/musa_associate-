@@ -1,55 +1,52 @@
-
 @extends('front.layouts.app')
 @section('content')
+    <!-- Page Title -->
+    <div class="page-title-area title-img-one">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="page-title-text">
+                    <h2>Case Studies Details</h2>
+                    <ul>
+                        <li>
+                            <a href="{{ route('front.home') }}">Home</a>
+                        </li>
+                        <li>
+                            <i class="icofont-simple-right"></i>
+                        </li>
+                        <li>Money Loundering</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Title -->
 
+    <!-- Case Details Img -->
+    <div class="case-details-img pt-100 pb-70">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-12">
+                    <div class="case-details-item">
+                        <img src="{{ asset('uploads/casestudies/' . $caseStudyPost->image) }}"
+                            alt="{{ $caseStudyPost->title }}" loading="lazy"
+                            style="width: 100%; height: auto; max-height: 400px; object-fit: cover; border-radius: 8px;">
 
- <!-- Page Title -->
-        <div class="page-title-area title-img-one">
-            <div class="d-table">
-                <div class="d-table-cell">
-                    <div class="page-title-text">
-                        <h2>Case Studies Details</h2>
-                        <ul>
-                            <li>
-                                <a href="{{ route('front.home') }}">Home</a>
-                            </li>
-                            <li>
-                                <i class="icofont-simple-right"></i>
-                            </li>
-                            <li>Money Loundering</li>
-                        </ul>
+                    </div>
+                    <div class="case-details-item">
+                        <h3>{{ $caseStudyPost->title }}</h3>
+                        <p>{!! $caseStudyPost->description !!}</p>
+
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End Page Title -->
+    </div>
+    <!-- End Case Details Img -->
+    <br>
+    <br>
 
-        <!-- Case Details Img -->
-        <div class="case-details-img pt-100 pb-70">
-            <div class="container">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-lg-5">
-                        <div class="case-details-item">
-                            <img src="{{ asset('uploads/casestudies/' . $caseStudyPost->image) }}" alt="{{ $caseStudyPost->title }}" loading="lazy">
-
-                        </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="case-details-item">
-                            <h3>{{ $caseStudyPost->title }}</h3>
-                            <p>{!! $caseStudyPost->description !!}</p>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Case Details Img -->
-        <br>
-        <br>
-
-        <!-- Case Details Tab -->
-        {{-- <div class="case-details-tab">
+    <!-- Case Details Tab -->
+    {{-- <div class="case-details-tab">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-lg-6">
@@ -94,9 +91,5 @@
                 </div>
             </div>
         </div> --}}
-        <!-- End Case Details Tab -->
-
-
-
-        @endsection
-
+    <!-- End Case Details Tab -->
+@endsection
