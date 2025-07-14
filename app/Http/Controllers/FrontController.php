@@ -50,6 +50,17 @@ class FrontController extends Controller
         $numbers = Number::latest()->take(1)->get();
         $data['numbers'] = $numbers;
 
+
+        $testimonials = Testimonial::all();
+        $data['testimonials'] = $testimonials;
+
+        $blogs = Blog::with(['author', 'categories'])
+        ->where('is_published', true)
+        ->orderByDesc('published_at')
+        ->take(6)
+        ->get();
+        $data['blogs'] = $blogs;
+
         return view('front.home', $data);
     }
 
@@ -124,6 +135,15 @@ class FrontController extends Controller
     }
 
 
+    public function testimonial()
+    {
+        $testimonials = Testimonial::all();
+        $data['testimonials'] = $testimonials;
+        return view('front.testimonial', $data);
+    }
+
+
+
     // public function blog()
     // {
     //     return view('front.blog');
@@ -143,15 +163,6 @@ class FrontController extends Controller
 
 
 
-     public function blog()
-    {
-        $blogs = Blog::with(['author', 'categories'])
-            ->where('is_published', true)
-            ->orderByDesc('published_at')
-            ->paginate(6); // Or whatever number per page you want
-
-        return view('front.blog', compact('blogs'));
-    }
 
     // public function blogDetails($slug)
     // {
@@ -163,18 +174,7 @@ class FrontController extends Controller
 
 
     // //------------blog section--------------------
-    private function getSidebarData()
-    {
-        return [
-            'categories' => BlogCategory::withCount('blogs')->get(),
-            'recentPosts' => Blog::where('is_published', 1)
-                ->whereNotNull('published_at')
-                ->latest()
-                ->take(5)
-                ->get(),
-            'tags' => BlogTag::withCount('blogs')->get(),
-        ];
-    }
+
 
     // public function blog()
     // {
@@ -188,6 +188,32 @@ class FrontController extends Controller
 
     //     return view('front.blog', array_merge(['blogs' => $blogs], $data));
     // }
+
+    private function getSidebarData()
+    {
+        return [
+            'categories' => BlogCategory::withCount('blogs')->get(),
+            'recentPosts' => Blog::where('is_published', 1)
+                ->whereNotNull('published_at')
+                ->latest()
+                ->take(5)
+                ->get(),
+            'tags' => BlogTag::withCount('blogs')->get(),
+        ];
+    }
+
+
+
+    public function blog()
+    {
+        $blogs = Blog::with(['author', 'categories'])
+            ->where('is_published', true)
+            ->orderByDesc('published_at')
+            ->paginate(6); // Or whatever number per page you want
+
+        return view('front.blog', compact('blogs'));
+    }
+
 
     public function categoryWiseBlog($id)
     {
@@ -242,6 +268,33 @@ class FrontController extends Controller
     }
 
 
+    // Blog details page------------------------------
+
+    // public function blogDetails($slug)
+    // {
+    //     $blog = Blog::where('slug', $slug)
+    //         ->where('is_published', true)
+    //         ->whereNotNull('published_at')
+    //         ->firstOrFail();
+
+    //     $categories = BlogCategory::withCount('blogs')->get();
+
+    //     $recentPosts = Blog::where('is_published', true)
+    //         ->whereNotNull('published_at')
+    //         ->latest()
+    //         ->take(5)
+    //         ->get();
+
+    //     $tags = BlogTag::withCount('blogs')->get();
+
+    //     $comments = $blog->comments()
+    //         ->whereNull('parent_id')
+    //         ->with('replies')
+    //         ->get();
+
+    //     return view('front.blog-details', compact('blog', 'categories', 'recentPosts', 'tags', 'comments'));
+    // }
+
 
     public function blogDetails($slug)
     {
@@ -250,14 +303,22 @@ class FrontController extends Controller
             ->whereNotNull('published_at')
             ->firstOrFail();
 
-        $categories = BlogCategory::withCount('blogs')->get();
+        $previous = Blog::where('is_published', true)
+            ->where('published_at', '<', $blog->published_at)
+            ->orderBy('published_at', 'desc')
+            ->first();
 
+        $next = Blog::where('is_published', true)
+            ->where('published_at', '>', $blog->published_at)
+            ->orderBy('published_at', 'asc')
+            ->first();
+
+        $categories = BlogCategory::withCount('blogs')->get();
         $recentPosts = Blog::where('is_published', true)
             ->whereNotNull('published_at')
             ->latest()
             ->take(5)
             ->get();
-
         $tags = BlogTag::withCount('blogs')->get();
 
         $comments = $blog->comments()
@@ -265,8 +326,17 @@ class FrontController extends Controller
             ->with('replies')
             ->get();
 
-        return view('front.blog-details', compact('blog', 'categories', 'recentPosts', 'tags', 'comments'));
+        return view('front.blog-details', compact(
+            'blog',
+            'previous',
+            'next',
+            'categories',
+            'recentPosts',
+            'tags',
+            'comments'
+        ));
     }
+
 
 
 
@@ -293,21 +363,21 @@ class FrontController extends Controller
 
     // //------------newsletter section--------------------
 
-public function subscribe(Request $request)
-{
-    // Validate email field
-    $request->validate([
-        'email' => 'required|email|unique:newsletters,email',
-    ]);
+    public function subscribe(Request $request)
+    {
+        // Validate email field
+        $request->validate([
+            'email' => 'required|email|unique:newsletters,email',
+        ]);
 
-    // Store subscriber
-    Newsletter::create([
-        'email' => $request->email,
-    ]);
+        // Store subscriber
+        Newsletter::create([
+            'email' => $request->email,
+        ]);
 
-    // Redirect with success message
-    return redirect()->back()->with('newsletter_success', 'You have successfully subscribed to our newsletter!');
-}
+        // Redirect with success message
+        return redirect()->back()->with('newsletter_success', 'You have successfully subscribed to our newsletter!');
+    }
 
 
 

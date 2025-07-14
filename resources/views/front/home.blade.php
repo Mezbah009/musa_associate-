@@ -529,257 +529,86 @@
 
     <!-- Blog -->
     <section class="blog-area pt-100">
+    <div class="container">
+        <div class="section-title">
+            <span>BLOG</span>
+            <h2>Our Latest Blogs</h2>
+        </div>
+
+        @if($blogs->count())
+            <div class="blog-slider owl-theme owl-carousel">
+                @foreach($blogs as $blog)
+                    <div class="blog-item">
+                        <a href="{{ route('front.blog.details', $blog->slug) }}">
+                            <img src="{{ asset('uploads/blogs/' . $blog->feature_image) }}" alt="{{ $blog->title }}">
+                        </a>
+                        <div class="blog-inner">
+                            <span>{{ optional($blog->categories->first())->name ?? 'Uncategorized' }}</span>
+                            <h3>
+                                <a href="{{ route('front.blog.details', $blog->slug) }}">
+                                    {{ Str::limit($blog->title, 70) }}
+                                </a>
+                            </h3>
+                            <ul>
+                                <li>
+                                    <i class="icofont-calendar"></i>
+                                    {{ \Carbon\Carbon::parse($blog->published_at)->format('d M Y') }}
+                                </li>
+                                <li>
+                                    <i class="icofont-user-alt-7"></i>
+                                    <a href="#">{{ $blog->author->name ?? 'Unknown Author' }}</a>
+                                </li>
+                            </ul>
+                            <p>{{ Str::limit($blog->excerpt ?? strip_tags($blog->content), 100) }}</p>
+                            <a class="blog-link" href="{{ route('front.blog.details', $blog->slug) }}">
+                                Read More
+                                <i class="icofont-simple-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p class="text-center">No blogs available.</p>
+        @endif
+    </div>
+</section>
+
+    <!-- End Blog -->
+
+
+        <!-- Testimonial -->
+    <div class="testimonial-area pt-">
+
         <div class="container">
             <div class="section-title">
-                <span>BLOG</span>
-                <h2>Our Latest Blogs</h2>
+                <span>TESTIMONIAL</span>
+                <h2>What Our Clients Say</h2>
             </div>
-            <div class="blog-slider owl-theme owl-carousel">
-                <div class="blog-item">
-                    <a href="blog-details.html">
-                        <img src="{{ asset('front-assets/assets/img/home-one/blog/1.jpg') }}" alt="Blog">
-                    </a>
-                    <div class="blog-inner">
-                        <span>Rights Case</span>
-                        <h3>
-                            <a href="blog-details.html">Justice May For You If You Are Innocent</a>
-                        </h3>
-                        <ul>
-                            <li>
-                                <i class="icofont-calendar"></i>
-                                20 Feb 2024
-                            </li>
-                            <li>
-                                <i class="icofont-user-alt-7"></i>
-                                <a href="index-2.html#">John Doe</a>
-                            </li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut
-                            labore.</p>
-                        <a class="blog-link" href="blog-details.html">
-                            Read More
-                            <i class="icofont-simple-right"></i>
-                        </a>
+
+            </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                @foreach ($testimonials as $testimonial)
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="testimonial-item">
+                            <div class="testimonial-wrap">
+                                <p>{{ $testimonial->description }}</p>
+                                <img src="{{ asset('uploads/testimonials/' . $testimonial->logo) }}" alt="Testimonial">
+                                <div class="testimonial-right">
+                                    <h3>{{ $testimonial->name }}</h3>
+                                    <span>{{ $testimonial->designation }}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="blog-item">
-                    <a href="blog-details.html">
-                        <img src="{{ asset('front-assets/assets/img/home-one/blog/2.jpg') }}" alt="Blog">
-                    </a>
-                    <div class="blog-inner">
-                        <span>Business Case</span>
-                        <h3>
-                            <a href="blog-details.html">By Whom Your Business Is Being Loss?</a>
-                        </h3>
-                        <ul>
-                            <li>
-                                <i class="icofont-calendar"></i>
-                                20 Feb 2024
-                            </li>
-                            <li>
-                                <i class="icofont-user-alt-7"></i>
-                                <a href="index-2.html#">John Doe</a>
-                            </li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut
-                            labore.</p>
-                        <a class="blog-link" href="blog-details.html">
-                            Read More
-                            <i class="icofont-simple-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="blog-item">
-                    <a href="blog-details.html">
-                        <img src="{{ asset('front-assets/assets/img/home-one/blog/3.jpg') }}" alt="Blog">
-                    </a>
-                    <div class="blog-inner">
-                        <span>Criminal Case</span>
-                        <h3>
-                            <a href="blog-details.html">Who Can The Victim A Sue After A Car Accident?</a>
-                        </h3>
-                        <ul>
-                            <li>
-                                <i class="icofont-calendar"></i>
-                                20 Feb 2024
-                            </li>
-                            <li>
-                                <i class="icofont-user-alt-7"></i>
-                                <a href="index-2.html#">John Doe</a>
-                            </li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut
-                            labore.</p>
-                        <a class="blog-link" href="blog-details.html">
-                            Read More
-                            <i class="icofont-simple-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="blog-item">
-                    <a href="blog-details.html">
-                        <img src="{{ asset('front-assets/assets/img/home-one/blog/1.jpg') }}" alt="Blog">
-                    </a>
-                    <div class="blog-inner">
-                        <span>Rights Case</span>
-                        <h3>
-                            <a href="blog-details.html">Justice May For You If You Are Innocent</a>
-                        </h3>
-                        <ul>
-                            <li>
-                                <i class="icofont-calendar"></i>
-                                20 Feb 2024
-                            </li>
-                            <li>
-                                <i class="icofont-user-alt-7"></i>
-                                <a href="index-2.html#">John Doe</a>
-                            </li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut
-                            labore.</p>
-                        <a class="blog-link" href="blog-details.html">
-                            Read More
-                            <i class="icofont-simple-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="blog-item">
-                    <a href="blog-details.html">
-                        <img src="{{ asset('front-assets/assets/img/home-one/blog/2.jpg') }}" alt="Blog">
-                    </a>
-                    <div class="blog-inner">
-                        <span>Business Case</span>
-                        <h3>
-                            <a href="blog-details.html">By Whom Your Business Is Being Loss?</a>
-                        </h3>
-                        <ul>
-                            <li>
-                                <i class="icofont-calendar"></i>
-                                20 Feb 2024
-                            </li>
-                            <li>
-                                <i class="icofont-user-alt-7"></i>
-                                <a href="index-2.html#">John Doe</a>
-                            </li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut
-                            labore.</p>
-                        <a class="blog-link" href="blog-details.html">
-                            Read More
-                            <i class="icofont-simple-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="blog-item">
-                    <a href="blog-details.html">
-                        <img src="{{ asset('front-assets/assets/img/home-one/blog/3.jpg') }}" alt="Blog">
-                    </a>
-                    <div class="blog-inner">
-                        <span>Criminal Case</span>
-                        <h3>
-                            <a href="blog-details.html">Who Can The Victim A Sue After A Car Accident?</a>
-                        </h3>
-                        <ul>
-                            <li>
-                                <i class="icofont-calendar"></i>
-                                20 Feb 2024
-                            </li>
-                            <li>
-                                <i class="icofont-user-alt-7"></i>
-                                <a href="index-2.html#">John Doe</a>
-                            </li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut
-                            labore.</p>
-                        <a class="blog-link" href="blog-details.html">
-                            Read More
-                            <i class="icofont-simple-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="blog-item">
-                    <a href="blog-details.html">
-                        <img src="{{ asset('front-assets/assets/img/home-one/blog/1.jpg') }}" alt="Blog">
-                    </a>
-                    <div class="blog-inner">
-                        <span>Rights Case</span>
-                        <h3>
-                            <a href="blog-details.html">Justice May For You If You Are Innocent</a>
-                        </h3>
-                        <ul>
-                            <li>
-                                <i class="icofont-calendar"></i>
-                                20 Feb 2024
-                            </li>
-                            <li>
-                                <i class="icofont-user-alt-7"></i>
-                                <a href="index-2.html#">John Doe</a>
-                            </li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut
-                            labore.</p>
-                        <a class="blog-link" href="blog-details.html">
-                            Read More
-                            <i class="icofont-simple-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="blog-item">
-                    <a href="blog-details.html">
-                        <img src="{{ asset('front-assets/assets/img/home-one/blog/2.jpg') }}" alt="Blog">
-                    </a>
-                    <div class="blog-inner">
-                        <span>Business Case</span>
-                        <h3>
-                            <a href="blog-details.html">By Whom Your Business Is Being Loss?</a>
-                        </h3>
-                        <ul>
-                            <li>
-                                <i class="icofont-calendar"></i>
-                                20 Feb 2024
-                            </li>
-                            <li>
-                                <i class="icofont-user-alt-7"></i>
-                                <a href="index-2.html#">John Doe</a>
-                            </li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut
-                            labore.</p>
-                        <a class="blog-link" href="blog-details.html">
-                            Read More
-                            <i class="icofont-simple-right"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="blog-item">
-                    <a href="blog-details.html">
-                        <img src="{{ asset('front-assets/assets/img/home-one/blog/3.jpg') }}" alt="Blog">
-                    </a>
-                    <div class="blog-inner">
-                        <span>Criminal Case</span>
-                        <h3>
-                            <a href="blog-details.html">Who Can The Victim A Sue After A Car Accident?</a>
-                        </h3>
-                        <ul>
-                            <li>
-                                <i class="icofont-calendar"></i>
-                                20 Feb 2024
-                            </li>
-                            <li>
-                                <i class="icofont-user-alt-7"></i>
-                                <a href="index-2.html#">John Doe</a>
-                            </li>
-                        </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor contratc ut
-                            labore.</p>
-                        <a class="blog-link" href="blog-details.html">
-                            Read More
-                            <i class="icofont-simple-right"></i>
-                        </a>
-                    </div>
-                </div>
+                @endforeach
+            </div>
+            <div class="testimonial-more">
+                <a class="cmn-btn" href="{{ route('front.testimonial') }}">See More</a>
             </div>
         </div>
-    </section>
-    <!-- End Blog -->
+    </div>
+    <!-- End Testimonial -->
+
 @endsection

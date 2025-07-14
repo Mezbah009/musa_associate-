@@ -24,7 +24,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="country_name">Country name</label>
                                     <input type="text" name="country_name" id="country_name" class="form-control"
@@ -73,12 +73,12 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="website">Website</label>
+                                    <label for="website">Twitter</label>
                                     <input type="text" name="website" id="website" class="form-control"
-                                        placeholder="website" value="{{ old('website') }}">
+                                        placeholder="Twitter" value="{{ old('website') }}">
                                     @error('website')
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                             <!-- Add similar fields for office_name and address -->
-                            <div class="col-md-3">
+                            {{-- <div class="col-md-3">
                                 <div class="mb-1">
                                     <label for="image">Image</label>
                                     <input type="file" id="image" name="image" class="form-control">
@@ -132,7 +132,7 @@
                                         <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

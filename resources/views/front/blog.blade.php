@@ -1,29 +1,28 @@
 @extends('front.layouts.app')
 @section('content')
-
-   <!-- Page Title -->
-        <div class="page-title-area title-img-one">
-            <div class="d-table">
-                <div class="d-table-cell">
-                    <div class="page-title-text">
-                        <h2>Our Blogs</h2>
-                        <ul>
-                            <li>
-                                <a href="{{ route('front.home') }}">Home</a>
-                            </li>
-                            <li>
-                                <i class="icofont-simple-right"></i>
-                            </li>
-                            <li>Blogs</li>
-                        </ul>
-                    </div>
+    <!-- Page Title -->
+    <div class="page-title-area title-img-one">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="page-title-text">
+                    <h2>Our Blogs</h2>
+                    <ul>
+                        <li>
+                            <a href="{{ route('front.home') }}">Home</a>
+                        </li>
+                        <li>
+                            <i class="icofont-simple-right"></i>
+                        </li>
+                        <li>Blogs</li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <!-- End Page Title -->
+    </div>
+    <!-- End Page Title -->
 
-        <!-- Blog -->
-  <section class="blog-area blog-area-two pt-100">
+    <!-- Blog -->
+    <section class="blog-area blog-area-two pt-100">
         <div class="container">
             <div class="row justify-content-center">
                 @forelse($blogs as $blog)
@@ -64,42 +63,40 @@
                 @endforelse
             </div>
 
-           <div class="case-pagination">
-    <ul>
-        {{-- Previous Page Link --}}
-        <li>
-            @if ($blogs->onFirstPage())
-                <span><i class="icofont-simple-left"></i></span>
-            @else
-                <a href="{{ $blogs->previousPageUrl() }}"><i class="icofont-simple-left"></i></a>
-            @endif
-        </li>
+            <div class="case-pagination">
+                <ul>
+                    {{-- Previous Page Link --}}
+                    <li>
+                        @if ($blogs->onFirstPage())
+                            <span><i class="icofont-simple-left"></i></span>
+                        @else
+                            <a href="{{ $blogs->previousPageUrl() }}"><i class="icofont-simple-left"></i></a>
+                        @endif
+                    </li>
 
-        {{-- Pagination Elements --}}
-        @for ($i = 1; $i <= $blogs->lastPage(); $i++)
-            <li>
-                @if ($i == $blogs->currentPage())
-                    <span class="active">{{ $i }}</span>
-                @else
-                    <a href="{{ $blogs->url($i) }}">{{ $i }}</a>
-                @endif
-            </li>
-        @endfor
+                    {{-- Pagination Elements --}}
+                    @for ($i = 1; $i <= $blogs->lastPage(); $i++)
+                        <li>
+                            @if ($i == $blogs->currentPage())
+                                <span class="active">{{ $i }}</span>
+                            @else
+                                <a href="{{ $blogs->url($i) }}">{{ $i }}</a>
+                            @endif
+                        </li>
+                    @endfor
 
-        {{-- Next Page Link --}}
-        <li>
-            @if ($blogs->hasMorePages())
-                <a href="{{ $blogs->nextPageUrl() }}"><i class="icofont-simple-right"></i></a>
-            @else
-                <span><i class="icofont-simple-right"></i></span>
-            @endif
-        </li>
-    </ul>
-</div>
+                    {{-- Next Page Link --}}
+                    <li>
+                        @if ($blogs->hasMorePages())
+                            <a href="{{ $blogs->nextPageUrl() }}"><i class="icofont-simple-right"></i></a>
+                        @else
+                            <span><i class="icofont-simple-right"></i></span>
+                        @endif
+                    </li>
+                </ul>
+            </div>
 
         </div>
     </section>
-        <!-- End Blog -->
-
-
-        @endsection
+    <!-- End Blog -->
+@endsection

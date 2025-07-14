@@ -174,41 +174,53 @@
 
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-sm-6 col-lg-5">
-                    <div class="footer-item">
-                        <div class="footer-logo">
-                            <a href="index-2.html#">
-                                <img src="{{ siteSetting() && siteSetting()->logo ? asset('uploads/logo/' . siteSetting()->logo) : asset('') }}"
-                                    alt="logo" class="img-fluid">
-                            </a>
-                            <p>We provide expert tax law services to help businesses stay compliant, reduce liabilities,
-                                and grow confidently. From tax planning to dispute resolution, our legal team is here to
-                                protect your interests.</p>
-                            <ul>
+     @foreach (footer()['contacts'] as $contact)
+            <div class="col-sm-6 col-lg-5">
+                <div class="footer-item">
+                    <div class="footer-logo">
+                        <a href="{{ url('/') }}">
+                            <img src="{{ siteSetting() && siteSetting()->logo ? asset('uploads/logo/' . siteSetting()->logo) : asset('default-logo.png') }}"
+                                 alt="logo" class="img-fluid">
+                        </a>
+                        <p>
+                            We provide expert tax law services to help businesses stay compliant, reduce liabilities,
+                            and grow confidently. From tax planning to dispute resolution, our legal team is here to
+                            protect your interests.
+                        </p>
+                        <ul>
+                            @if($contact->youtube)
                                 <li>
-                                    <a href="https://www.youtube.com/" target="_blank">
+                                    <a href="{{ $contact->youtube }}" target="_blank">
                                         <i class="icofont-youtube-play"></i>
                                     </a>
                                 </li>
+                            @endif
+                            @if($contact->facebook)
                                 <li>
-                                    <a href="https://www.facebook.com/" target="_blank">
+                                    <a href="{{ $contact->facebook }}" target="_blank">
                                         <i class="icofont-facebook"></i>
                                     </a>
                                 </li>
+                            @endif
+                            @if($contact->linkedIn)
                                 <li>
-                                    <a href="https://www.instagram.com/" target="_blank">
-                                        <i class="icofont-instagram"></i>
+                                    <a href="{{ $contact->linkedIn }}" target="_blank">
+                                        <i class="icofont-linkedin"></i>
                                     </a>
                                 </li>
+                            @endif
+                            @if($contact->website)
                                 <li>
-                                    <a href="https://www.twitter.com/" target="_blank">
+                                    <a href="{{ $contact->website }}" target="_blank">
                                         <i class="icofont-twitter"></i>
                                     </a>
                                 </li>
-                            </ul>
-                        </div>
+                            @endif
+                        </ul>
                     </div>
                 </div>
+            </div>
+        @endforeach
 
                 <div class="col-sm-6 col-lg-3">
                     <div class="footer-item">

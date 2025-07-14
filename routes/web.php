@@ -111,6 +111,9 @@ Route::get('/case-study', [FrontController::class, 'caseStudy'])->name('front.ca
 Route::get('/case-study/{slug}', [FrontController::class, 'showCaseStudy'])->name('front.showCaseStudy');
 
 
+Route::get('/testimonial', [FrontController::class, 'testimonial'])->name('front.testimonial');
+
+
 
 
 

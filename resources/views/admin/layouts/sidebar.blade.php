@@ -191,7 +191,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.contact.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-envelope"></i>
+                        <i class="nav-icon fas fa-calendar-check"></i>
                         <p>Appointment</p>
                     </a>
                 </li>
@@ -302,12 +302,12 @@
                         <p>Jobs</p>
                     </a>
                 </li> --}}
-                {{-- <li class="nav-item">
+                <li class="nav-item">
                     <a href="{{ route('contact.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-envelope"></i>
-                        <p>Contact Us</p>
+                        <i class="nav-icon fas fa-share-alt"></i>
+                        <p>Social Media</p>
                     </a>
-                </li> --}}
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('numbers.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-phone"></i>

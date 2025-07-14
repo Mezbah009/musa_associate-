@@ -44,11 +44,10 @@
                     <thead>
                         <tr>
                             <th width="60">ID</th>
-                            <th>Image</th>
-                            <th>Flag</th>
-                            <th>Country Name</th>
-                            <th>Company Name</th>
-                            <th>Office Name</th>
+                            <th>Facebook</th>
+                            <th>LinkedIn</th>
+                            <th>Youtube</th>
+                            <th>Twitter</th>
                             <th width="100">Action</th>
                         </tr>
                     </thead>
@@ -57,27 +56,10 @@
                         @foreach ($sections as $section)
                         <tr>
                             <td>{{$section->id}}</td>
-                            <td>
-                                @if(!empty($section->image))
-                                <img src="{{asset('uploads/first_section/'.$section->image)}}" class="img-thumbnail"
-                                    alt="{{$section->title}}" width="50">
-                                @else
-                                <img src="{{asset('admin-assets/img/default.png')}}" class="img-thumbnail"
-                                    alt="default image" width="50">
-                                @endif
-                            </td>
-                            <td>
-                                @if(!empty($section->flag))
-                                <img src="{{asset('uploads/first_section/'.$section->flag)}}" class="img-thumbnail"
-                                    alt="{{$section->title}}" width="50">
-                                @else
-                                <img src="{{asset('admin-assets/img/default.png')}}" class="img-thumbnail"
-                                    alt="default image" width="50">
-                                @endif
-                            </td>
-                            <td>{{$section->country_name}}</td>
-                            <td>{{$section->company_name}}</td>
-                            <td>{{$section->office_name}}</td>
+                            <td>{{$section->facebook}}</td>
+                            <td>{{$section->linkedIn}}</td>
+                            <td>{{$section->youtube}}</td>
+                            <td>{{$section->website}}</td>
                             {{-- <td>
                                 @if ($section->active == 'Yes')
                                 <svg class="text-success-500 h-6 w-6 text-success" xmlns="http://www.w3.org/2000/svg"
